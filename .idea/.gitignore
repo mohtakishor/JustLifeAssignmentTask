@@ -1,4 +1,4 @@
-# Maven
+# Maven output
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -21,5 +21,8 @@ Thumbs.db
 *.tmp
 test-output/
 
-# Others
+# Compiled class files
+*.class
+
+# Node modules (if using Node tools)
 node_modules/
