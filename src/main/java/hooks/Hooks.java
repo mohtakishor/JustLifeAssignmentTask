@@ -6,6 +6,7 @@ import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import utilies.Constant;
 import utilies.DriverFactory;
 
 import java.io.File;
@@ -20,7 +21,7 @@ public class Hooks {
 
     @Before
     public void setUp() {
-        DriverFactory.getDriver().get("https://www.justlife.com/en-AE/home-cleaning/checkout/details?step=1");
+        DriverFactory.getDriver().get(Constant.URL);
     }
 
     @After
