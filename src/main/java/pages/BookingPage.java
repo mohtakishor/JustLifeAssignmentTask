@@ -70,12 +70,12 @@ public class BookingPage extends CommonMethods {
     }
 
     public void selectNumberOfHours(int hours) {
-        waitUntilAnyElementVisible(hoursCount, 5000L);
+        waitUntilAnyElementVisible(hoursCount, 1000L);
         clickOnListOfElement(hoursCount, hours);
     }
 
     public void selectNumberOfCleaners(int cleaners) {
-        waitUntilAnyElementVisible(cleanersCount, 5000L);
+        waitUntilAnyElementVisible(cleanersCount, 1000L);
         clickOnListOfElement(cleanersCount, cleaners);
     }
 
@@ -126,6 +126,7 @@ public class BookingPage extends CommonMethods {
 
     public void enterOTP() {
         char otp[] = Constant.loginOTP.toCharArray();
+        hardWait(5000L);
         for (int i = 0; i <= otp.length - 1; i++) {
             clickAndSendKeys(enterOTP.get(i), String.valueOf(otp[i]));
         }

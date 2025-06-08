@@ -20,8 +20,8 @@ public class CommonMethods {
     }
 
     public void click(WebElement element) {
+        waitUntilElementVisible(element, 1000L);
         waitForVisibility(element);
-        isElementDisplayed(element);
         element.click();
     }
 
@@ -56,8 +56,7 @@ public class CommonMethods {
     public void waitForDomLoad() {
         ExpectedCondition<Boolean> pageLoadCondition = new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
-                return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals(
-                        "complete");
+                return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
             }
         };
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
@@ -79,7 +78,7 @@ public class CommonMethods {
     }
 
     public void waitUntilAnyElementVisible(List<WebElement> elements, long timeoutInMillis) {
-        long endTime = System.currentTimeMillis() + (timeoutInMillis * 5);
+        long endTime = System.currentTimeMillis() + (timeoutInMillis * 10);
 
         while (System.currentTimeMillis() < endTime) {
             for (WebElement element : elements) {
@@ -88,12 +87,26 @@ public class CommonMethods {
                         return;
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
             hardWait(5000L);
         }
 
+        throw new NoSuchElementException("No element in the list became visible within the timeout.");
+    }
+
+    public void waitUntilElementVisible(WebElement elements, long timeoutInMillis) {
+        long endTime = System.currentTimeMillis() + (timeoutInMillis * 10);
+
+        while (System.currentTimeMillis() < endTime) {
+            try {
+                if (elements.isDisplayed()) {
+                    return;
+                }
+            } catch (Exception e) {
+            }
+            hardWait(1000L);
+        }
         throw new NoSuchElementException("No element in the list became visible within the timeout.");
     }
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="71.583" tests="2" skipped="0" failures="0" errors="0">
+<testcase classname="Booking a home cleaning service" name="Create a booking with given details - #1.1" time="40.08">
+<system-out><![CDATA[
+Given I have launched the application Successfully..........................passed
+When I create a booking with "Weekly", "Dubai Marina", "Yes", "1", "2", "Yes".passed
+And I logged in the Application.............................................passed
+And I have successfully did the "Cash"......................................passed
+Then The booking should be created successfully.............................passed
+]]></system-out>
+</testcase>
+<testcase classname="Booking a home cleaning service" name="Create a booking with given details - #1.2" time="31.407">
+<system-out><![CDATA[
+Given I have launched the application Successfully..........................passed
+When I create a booking with "One Time", "Dubai Marina", "No", "2", "2", "No".passed
+And I logged in the Application.............................................passed
+And I have successfully did the "Cash"......................................passed
+Then The booking should be created successfully.............................passed
+]]></system-out>
+</testcase>
+</testsuite>
