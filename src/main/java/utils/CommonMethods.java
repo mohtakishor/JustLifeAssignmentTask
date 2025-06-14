@@ -28,6 +28,8 @@ public class CommonMethods {
     public void click(WebElement element) {
         waitUntilElementVisible(element, 1000L);
         waitForVisibility(element);
+        isElementDisplayed(element);
+        waitTillElementIsClickable(element);
         element.click();
     }
 
@@ -49,7 +51,6 @@ public class CommonMethods {
     }
 
     public void clickOnListOfElement(List<WebElement> element, int i) {
-        System.out.println(element.get(i).getText());
         click(element.get(i));
     }
 
@@ -60,6 +61,8 @@ public class CommonMethods {
     }
 
     public void scrollToElement(WebElement element) {
+        waitForDomLoad();
+        hardWait(5000L);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element);
     }
@@ -84,7 +87,7 @@ public class CommonMethods {
 
     public void isElementDisplayed(WebElement element) {
         if (!element.isDisplayed()) {
-            hardWait(5000L);
+            explicitWait(element);
         }
     }
 
@@ -123,7 +126,14 @@ public class CommonMethods {
 
     public void explicitWait(WebElement element) {
         waitForDomLoad();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void waitTillElementIsClickable(WebElement element) {
+        waitForDomLoad();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+
     }
 }

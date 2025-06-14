@@ -5,9 +5,9 @@ Feature: Booking a home cleaning service
     When I create a booking with "<Booking Type>", "<Location>", "<Material>", "<Cleaners>", "<Hours>", "<Cleaners Selection>", "<Date Selection>"
     And I logged in the Application
     And I have successfully did the payment with as "<Payment Method>"
-    Then The booking should be created successfully
+    Then The booking should be cancelled successfully
 
     Examples:
       | Booking Type | Location     | Material | Cleaners | Hours | Payment Method | Cleaners Selection | Date Selection |
-      | One Time     | Dubai Marina | Yes      | 1        | 2     | Google Pay     | Yes                | Yes            |
-      | Weekly       | Dubai Marina | No       | 2        | 2     | Google Pay     | No                 | No             |
+      | One Time     | Dubai Marina | Yes      | 1        | 2     | Cash           | Yes                | Yes            |
+      | Weekly       | Dubai Marina | No       | 2        | 2     | Cash           | No                 | No             |

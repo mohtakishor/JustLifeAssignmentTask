@@ -80,6 +80,27 @@ public class BookingPage extends CommonMethods {
     @FindBy(id = "funnel-complete-button")
     WebElement completePaymentCTA;
 
+    @FindBy(id = "bd-manage-booking-button-text")
+    WebElement manageThisBookingCTA;
+
+    @FindBy(id = "bd-manage-booking-button")
+    WebElement editBookingCTA;
+
+    @FindBy(id = "mbm-cancel-booking-button-text")
+    WebElement cancelBookingCTA;
+
+    @FindBy(id = "cancel-confirm-button")
+    WebElement cancelConfirmBookingCTA;
+
+    @FindBy(id = "cancel-question-modal-cancel")
+    WebElement confirmCancel;
+
+    @FindBy(xpath = "(//div[@class='radio-circle _vc _c'])[1]")
+    WebElement selectReasonForCancel;
+
+    @FindBy(id = "confirm-cancel-reason-button")
+    WebElement confirmReasonCancel;
+
     public BookingPage(WebDriver driver) {
         logger = LoggerUtil.getLogger(this.getClass());
         this.driver = driver;
@@ -147,6 +168,7 @@ public class BookingPage extends CommonMethods {
         LocalDate currentDate = LocalDate.now().plusDays(1);
         String tomorrowDate = currentDate.format(DateTimeFormatter.ofPattern("dd"));
         String dateXpath = "//span[@id='enabled-day-1-text' and text()='" + tomorrowDate + "']";
+        hardWait(5000L);
         clickOnElementWithDynamicXpath(dateXpath);
         selectTime("09:00-09:30");
         click(nextCTA);
@@ -180,6 +202,21 @@ public class BookingPage extends CommonMethods {
         String paymentTypeXpath = "//span[contains(text(),'" + paymentMethod + "')]/ancestor::div[contains(@class,'radio-selection')]//div[contains(@class,'radio-circle')]";
         clickOnElementWithDynamicXpath(paymentTypeXpath);
         click(selectPaymentMethodCTA);
+        hardWait(5000L);
         click(completePaymentCTA);
+    }
+
+    public void cancelBooking() {
+        logger.info("Cancelling the order");
+        scrollToElement(manageThisBookingCTA);
+        click(manageThisBookingCTA);
+        scrollToElement(editBookingCTA);
+        click(editBookingCTA);
+        click(cancelBookingCTA);
+        click(cancelConfirmBookingCTA);
+        click(confirmCancel);
+        click(selectReasonForCancel);
+        scrollToElement(confirmReasonCancel);
+        click(confirmReasonCancel);
     }
 }

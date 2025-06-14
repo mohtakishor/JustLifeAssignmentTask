@@ -41,8 +41,9 @@ public class BookingSteps extends BaseStep {
         }
     }
 
-    @Then("The booking should be created successfully")
-    public void booking_created() {
+    @Then("The booking should be cancelled successfully")
+    public void booking_cancelled() {
+        bookingPage.cancelBooking();
     }
 
     @And("I have successfully did the payment with as {string}")
