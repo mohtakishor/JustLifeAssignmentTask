@@ -1,15 +1,21 @@
 package pages;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.*;
-import utilies.CommonMethods;
-import utilies.Constant;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import utils.CommonMethods;
+import utils.Constant;
+import utils.LoggerUtil;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class BookingPage extends CommonMethods {
 
     WebDriver driver;
+    protected Logger logger;
 
     @FindBy(xpath = "//span[contains(@id,'duration-')]")
     List<WebElement> hoursCount;
@@ -65,21 +71,34 @@ public class BookingPage extends CommonMethods {
     @FindBy(xpath = "//input[contains(@id,'otp-digit-')]")
     List<WebElement> enterOTP;
 
+    @FindBy(id = "payment-change")
+    WebElement paymentChangeCTA;
+
+    @FindBy(id = "paymentMethods-button")
+    WebElement selectPaymentMethodCTA;
+
+    @FindBy(id = "funnel-complete-button")
+    WebElement completePaymentCTA;
+
     public BookingPage(WebDriver driver) {
+        logger = LoggerUtil.getLogger(this.getClass());
         this.driver = driver;
     }
 
-    public void selectNumberOfHours(int hours) {
+    public void selectNumberOfHours(String hours) {
+        logger.info("Selecting number of Hours :" + hours);
         waitUntilAnyElementVisible(hoursCount, 1000L);
-        clickOnListOfElement(hoursCount, hours);
+        clickOnListOfElement(hoursCount, Integer.parseInt(hours) - 1);
     }
 
-    public void selectNumberOfCleaners(int cleaners) {
+    public void selectNumberOfCleaners(String cleaners) {
+        logger.info("Selecting number of Clearner :" + cleaners);
         waitUntilAnyElementVisible(cleanersCount, 1000L);
-        clickOnListOfElement(cleanersCount, cleaners);
+        clickOnListOfElement(cleanersCount, Integer.parseInt(cleaners) - 1);
     }
 
     public void selectMaterialAndClickNext(String material) {
+        logger.info("Selecting material option :" + material);
         if (material.equalsIgnoreCase("Yes")) {
             click(materialYes);
         } else {
@@ -89,6 +108,7 @@ public class BookingPage extends CommonMethods {
     }
 
     public void selectLocation(String location) {
+        logger.info("Entered Location :" + location);
         clickAndSendKeys(locationInput, location);
         click(locationFirst);
         hardWait(5000L);
@@ -98,6 +118,7 @@ public class BookingPage extends CommonMethods {
     }
 
     public void selectBookingType(String bookingType) {
+        logger.info("Type of Booking :" + bookingType);
         if (bookingType.equalsIgnoreCase("One Time")) {
             click(oneTimeBooking);
         } else if (bookingType.equalsIgnoreCase("Weekly")) {
@@ -107,28 +128,58 @@ public class BookingPage extends CommonMethods {
     }
 
     public void selectFirstCleaner() {
+        logger.info("Booking first clearner ");
         waitUntilAnyElementVisible(firstAvailableCleaner, 5000L);
         clickOnListOfElement(firstAvailableCleaner, 1);
     }
 
     public void selectFirstAvailableDateTimeAndClickNext() {
+        logger.info("Selecting date range and time");
         scrollToElementWithExtraOffset(dateRange, -100);
         waitUntilAnyElementVisible(availableDates, 5000L);
         clickOnListOfElement(availableDates, 1);
         click(nextCTA);
     }
 
+    public void selectTomorrow9AM() {
+        logger.info("Clicking on next day date");
+        hardWait(5000L);
+        LocalDate currentDate = LocalDate.now().plusDays(1);
+        String tomorrowDate = currentDate.format(DateTimeFormatter.ofPattern("dd"));
+        String dateXpath = "//span[@id='enabled-day-1-text' and text()='" + tomorrowDate + "']";
+        clickOnElementWithDynamicXpath(dateXpath);
+        selectTime("09:00-09:30");
+        click(nextCTA);
+    }
+
+    public void selectTime(String serviceTime) {
+        logger.info("Clicking on time for service :" + serviceTime);
+        String timeXpath = "//span[@id='time-2-text' and text()='" + serviceTime + "']";
+        clickOnElementWithDynamicXpath(timeXpath);
+    }
+
     public void loginSuccessfully() {
+        logger.info("Logged in with number :" + Constant.loginNumber);
         clickAndSendKeys(enterLoginNum, Constant.loginNumber);
         click(loginContinueCTA);
         enterOTP();
     }
 
     public void enterOTP() {
+        logger.info("Entered otp as :" + Constant.loginOTP);
         char otp[] = Constant.loginOTP.toCharArray();
         hardWait(5000L);
         for (int i = 0; i <= otp.length - 1; i++) {
             clickAndSendKeys(enterOTP.get(i), String.valueOf(otp[i]));
         }
+    }
+
+    public void selectPaymentTypeAndCompletePayment(String paymentMethod) {
+        logger.info("Payment mode selection as :" + paymentMethod);
+        click(paymentChangeCTA);
+        String paymentTypeXpath = "//span[contains(text(),'" + paymentMethod + "')]/ancestor::div[contains(@class,'radio-selection')]//div[contains(@class,'radio-circle')]";
+        clickOnElementWithDynamicXpath(paymentTypeXpath);
+        click(selectPaymentMethodCTA);
+        click(completePaymentCTA);
     }
 }

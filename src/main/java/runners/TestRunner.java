@@ -2,10 +2,12 @@ package runners;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
+import org.testng.annotations.AfterSuite;
+import utils.EmailReporting;
 
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue = {"stepdefinitions","hooks"},
+        glue = {"stepdefinitions", "hooks"},
         plugin = {
                 "pretty",
                 "html:target/cucumber-reports/cucumber.html",
@@ -15,4 +17,9 @@ import io.cucumber.testng.CucumberOptions;
         monochrome = true
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
+
+    @AfterSuite
+    public void sendEmailReport() {
+        EmailReporting.sendReport(); // ✅ Called after entire suite
+    }
 }

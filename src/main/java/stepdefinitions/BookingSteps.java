@@ -1,48 +1,19 @@
 package stepdefinitions;
 
-import io.cucumber.java.en.*;
-import org.openqa.selenium.WebDriver;
+import base.BaseStep;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pages.BookingPage;
-import utilies.Constant;
-import utilies.DriverFactory;
+import utils.Constant;
 
-public class BookingSteps {
-
-    private final WebDriver driver = DriverFactory.getDriver();
-    private final BookingPage bookingPage = new BookingPage(driver);
-
-    @When("I create a booking with {string}, {string}, {string}, {string}, {string}, {string}")
-    public void i_create_a_booking_with(String bookingType, String location, String material, String cleaners, String hours, String cleanerSelection) {
-
-        // Selecting hours and cleaners (assuming the UI requires index-based selection)
-        bookingPage.selectNumberOfHours(Integer.parseInt(hours) - 1);
-        bookingPage.selectNumberOfCleaners(Integer.parseInt(cleaners) - 1);
-
-        // Selecting material (Yes/No)
-        bookingPage.selectMaterialAndClickNext(material);
-
-        // Selecting location and booking type
-        bookingPage.selectLocation(location);
-        bookingPage.selectBookingType(bookingType);
-
-        // Selecting the First Cleaner or Custom
-        if (cleanerSelection.equalsIgnoreCase("Yes")) {
-            bookingPage.selectFirstCleaner();
-        }
-
-        // Date and time selection (you can adjust if needed)
-        bookingPage.selectFirstAvailableDateTimeAndClickNext();
-
-    }
-
-    @Then("The booking should be created successfully")
-    public void booking_created() {
-    }
+public class BookingSteps extends BaseStep {
 
     @Given("I have launched the application Successfully")
     public void launched_the_application_successfully() {
-        System.out.println("Launched the Web Site");
+        init();
+        driver.get(Constant.URL);
         Assert.assertEquals(Constant.URL, driver.getCurrentUrl(), "Failed to launch the Application");
     }
 
@@ -51,8 +22,31 @@ public class BookingSteps {
         bookingPage.loginSuccessfully();
     }
 
-    @And("I have successfully did the {string}")
-    public void iHaveSuccesfullyDidThe(String payment) {
-        System.out.println("Need to discuss for payment" + payment);
+    @When("I create a booking with {string}, {string}, {string}, {string}, {string}, {string}, {string}")
+    public void i_create_a_booking_with(String bookingType, String location, String material, String cleaners, String hours, String cleanerSelection, String dateSelection) {
+        bookingPage.selectNumberOfHours(hours);
+        bookingPage.selectNumberOfCleaners(cleaners);
+        bookingPage.selectMaterialAndClickNext(material);
+        bookingPage.selectLocation(location);
+        bookingPage.selectBookingType(bookingType);
+
+        if (cleanerSelection.equalsIgnoreCase("Yes")) {
+            bookingPage.selectFirstCleaner();
+        }
+
+        if (dateSelection.equalsIgnoreCase("Yes")) {
+            bookingPage.selectFirstAvailableDateTimeAndClickNext();
+        } else {
+            bookingPage.selectTomorrow9AM();
+        }
+    }
+
+    @Then("The booking should be created successfully")
+    public void booking_created() {
+    }
+
+    @And("I have successfully did the payment with as {string}")
+    public void iHaveSuccessfullyDidThePaymentWithAs(String paymentMethod) {
+        bookingPage.selectPaymentTypeAndCompletePayment(paymentMethod);
     }
 }

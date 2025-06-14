@@ -1,17 +1,15 @@
-package utilies;
+package driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class DriverFactory {
+public class DriverFactory implements DriverManager {
 
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    private DriverFactory() {
-    }
-
-    public static WebDriver getDriver() {
+    @Override
+    public WebDriver getDriver() {
         if (driver.get() == null) {
             WebDriverManager.chromedriver().setup();
             driver.set(new ChromeDriver());
@@ -20,7 +18,8 @@ public class DriverFactory {
         return driver.get();
     }
 
-    public static void quitDriver() {
+    @Override
+    public void quitDriver() {
         if (driver.get() != null) {
             driver.get().quit();
             driver.remove();

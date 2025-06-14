@@ -1,0 +1,72 @@
+2025-06-14 18:52:39 [main] INFO  hooks.Hooks - ===== Test Suite Started =====
+2025-06-14 18:52:42 [main] INFO  hooks.Hooks - Successfully launched the application
+2025-06-14 18:52:43 [main] INFO  hooks.Hooks - Closing the Web
+2025-06-14 18:52:43 [main] INFO  hooks.Hooks - ===== Test Suite Started =====
+2025-06-14 18:52:45 [main] INFO  hooks.Hooks - Successfully launched the application
+2025-06-14 18:52:46 [main] INFO  hooks.Hooks - Closing the Web
+2025-06-14 18:54:03 [main] INFO  hooks.Hooks - ===== Test Suite Started =====
+2025-06-14 18:54:06 [main] INFO  hooks.Hooks - Successfully launched the application
+2025-06-14 18:54:06 [main] INFO  pages.BookingPage - Selecting number of Hours :2
+2025-06-14 18:54:11 [main] INFO  pages.BookingPage - Selecting number of Clearner :1
+2025-06-14 18:54:11 [main] INFO  pages.BookingPage - Selecting material option :Yes
+2025-06-14 18:54:12 [main] INFO  pages.BookingPage - Entered Location :Dubai Marina
+2025-06-14 18:54:24 [main] INFO  pages.BookingPage - Type of Booking :One Time
+2025-06-14 18:54:28 [main] INFO  pages.BookingPage - Booking first clearner 
+2025-06-14 18:54:28 [main] INFO  pages.BookingPage - Selecting date range and time
+2025-06-14 18:54:29 [main] INFO  pages.BookingPage - Logged in with number :501234567
+2025-06-14 18:54:30 [main] INFO  pages.BookingPage - Entered otp as :4040
+2025-06-14 18:54:35 [main] INFO  pages.BookingPage - Payment mode selection as :Google Pay
+2025-06-14 18:54:48 [main] INFO  hooks.Hooks - Closing the Web
+2025-06-14 18:54:48 [main] INFO  hooks.Hooks - ===== Test Suite Started =====
+2025-06-14 18:54:51 [main] INFO  hooks.Hooks - Successfully launched the application
+2025-06-14 18:54:52 [main] INFO  pages.BookingPage - Selecting number of Hours :2
+2025-06-14 18:54:57 [main] INFO  pages.BookingPage - Selecting number of Clearner :2
+2025-06-14 18:54:57 [main] INFO  pages.BookingPage - Selecting material option :NO
+2025-06-14 18:54:57 [main] INFO  pages.BookingPage - Entered Location :Dubai Marina
+2025-06-14 18:55:10 [main] INFO  pages.BookingPage - Type of Booking :Weekly
+2025-06-14 18:55:13 [main] INFO  pages.BookingPage - Clicking on next day date
+2025-06-14 18:55:13 [main] INFO  hooks.Hooks - Closing the Web
+2025-06-14 18:56:22 [main] INFO  hooks.Hooks - ===== Test Suite Started =====
+2025-06-14 18:56:26 [main] INFO  hooks.Hooks - Successfully launched the application
+2025-06-14 18:56:26 [main] INFO  pages.BookingPage - Selecting number of Hours :2
+2025-06-14 18:56:31 [main] INFO  pages.BookingPage - Selecting number of Clearner :2
+2025-06-14 18:56:31 [main] INFO  pages.BookingPage - Selecting material option :NO
+2025-06-14 18:56:31 [main] INFO  pages.BookingPage - Entered Location :Dubai Marina
+2025-06-14 18:56:48 [main] INFO  pages.BookingPage - Type of Booking :Weekly
+2025-06-14 18:56:51 [main] INFO  pages.BookingPage - Clicking on next day date
+2025-06-14 18:56:52 [main] INFO  hooks.Hooks - Closing the Web
+2025-06-14 18:57:16 [main] INFO  hooks.Hooks - ===== Test Suite Started =====
+2025-06-14 18:57:20 [main] INFO  hooks.Hooks - Successfully launched the application
+2025-06-14 18:57:20 [main] INFO  pages.BookingPage - Selecting number of Hours :2
+2025-06-14 18:57:25 [main] INFO  pages.BookingPage - Selecting number of Clearner :2
+2025-06-14 18:57:25 [main] INFO  pages.BookingPage - Selecting material option :NO
+2025-06-14 18:57:25 [main] INFO  pages.BookingPage - Entered Location :Dubai Marina
+2025-06-14 18:57:42 [main] INFO  pages.BookingPage - Type of Booking :Weekly
+2025-06-14 18:57:49 [main] INFO  pages.BookingPage - Clicking on next day date
+2025-06-14 18:58:11 [main] INFO  pages.BookingPage - Clicking on time for service :09:00-09:30
+2025-06-14 18:58:36 [main] INFO  pages.BookingPage - Logged in with number :501234567
+2025-06-14 18:58:36 [main] INFO  pages.BookingPage - Entered otp as :4040
+2025-06-14 18:58:55 [main] INFO  pages.BookingPage - Payment mode selection as :Google Pay
+2025-06-14 18:59:11 [main] INFO  hooks.Hooks - Closing the Web
+2025-06-14 19:04:50 [main] INFO  hooks.Hooks - ===== Test Suite Started =====
+2025-06-14 19:04:54 [main] INFO  hooks.Hooks - Successfully launched the application
+2025-06-14 19:04:54 [main] INFO  pages.BookingPage - Selecting number of Hours :2
+2025-06-14 19:04:59 [main] INFO  pages.BookingPage - Selecting number of Clearner :1
+2025-06-14 19:04:59 [main] INFO  pages.BookingPage - Selecting material option :Yes
+2025-06-14 19:04:59 [main] INFO  pages.BookingPage - Entered Location :Dubai Marina
+2025-06-14 19:05:20 [main] INFO  pages.BookingPage - Type of Booking :One Time
+2025-06-14 19:05:25 [main] INFO  pages.BookingPage - Booking first clearner 
+2025-06-14 19:05:25 [main] INFO  pages.BookingPage - Selecting date range and time
+2025-06-14 19:05:25 [main] INFO  pages.BookingPage - Logged in with number :501234567
+2025-06-14 19:05:31 [main] INFO  pages.BookingPage - Entered otp as :4040
+2025-06-14 19:05:36 [main] INFO  pages.BookingPage - Payment mode selection as :Google Pay
+2025-06-14 19:05:52 [main] INFO  hooks.Hooks - Closing the Web
+2025-06-14 19:05:52 [main] INFO  hooks.Hooks - ===== Test Suite Started =====
+2025-06-14 19:05:54 [main] INFO  hooks.Hooks - Successfully launched the application
+2025-06-14 19:05:55 [main] INFO  pages.BookingPage - Selecting number of Hours :2
+2025-06-14 19:06:00 [main] INFO  pages.BookingPage - Selecting number of Clearner :2
+2025-06-14 19:06:00 [main] INFO  pages.BookingPage - Selecting material option :No
+2025-06-14 19:06:01 [main] INFO  pages.BookingPage - Entered Location :Dubai Marina
+2025-06-14 19:06:21 [main] INFO  pages.BookingPage - Type of Booking :Weekly
+2025-06-14 19:06:26 [main] INFO  pages.BookingPage - Clicking on next day date
+2025-06-14 19:06:27 [main] INFO  hooks.Hooks - Closing the Web

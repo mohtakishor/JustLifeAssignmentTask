@@ -1,10 +1,15 @@
-package utilies;
+package utils;
 
+import driver.DriverFactory;
+import driver.DriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
@@ -13,9 +18,10 @@ import java.util.NoSuchElementException;
 public class CommonMethods {
 
     protected WebDriver driver;
+    DriverManager driverManager = new DriverFactory();
 
     public CommonMethods() {
-        this.driver = utilies.DriverFactory.getDriver();
+        this.driver = driverManager.getDriver();
         PageFactory.initElements(driver, this);
     }
 
@@ -23,6 +29,11 @@ public class CommonMethods {
         waitUntilElementVisible(element, 1000L);
         waitForVisibility(element);
         element.click();
+    }
+
+    public void clickOnElementWithDynamicXpath(String xpath) {
+        WebElement element = driver.findElement(By.xpath(xpath));
+        click(element);
     }
 
     public void clickAndSendKeys(WebElement element, String text) {

@@ -1,13 +1,16 @@
 package hooks;
 
+import driver.DriverFactory;
+import driver.DriverManager;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import utilies.Constant;
-import utilies.DriverFactory;
+import utils.Constant;
+import utils.LoggerUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,32 +20,34 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Hooks {
-    WebDriver driver = DriverFactory.getDriver();
+
+    protected Logger logger;
+    DriverManager driverManager = new DriverFactory();
+    WebDriver driver;
 
     @Before
     public void setUp() {
-        DriverFactory.getDriver().get(Constant.URL);
+        logger = LoggerUtil.getLogger(this.getClass());
+        logger.info("===== Test Suite Started =====");
+        driver = driverManager.getDriver();
+        driver.get(Constant.URL);
+        logger.info("Successfully launched the application");
     }
 
     @After
     public void tearDown(Scenario scenario) {
         if (scenario.isFailed()) {
+            logger.debug("Added screenshot for failed test cases");
             takeScreenshot(scenario);
         }
-        // Quit the driver to start fresh for next scenario
-        DriverFactory.quitDriver();
+        logger.info("Closing the Web");
+        driverManager.quitDriver();
     }
 
-
     private void takeScreenshot(Scenario scenario) {
-
-        // Capture screenshot
         byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-
-        // Attach to Cucumber report
         scenario.attach(screenshot, "image/png", "Failure Screenshot");
 
-        //Saving screenshot to the folder
         File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
         String fileName = "target/screenshots/" + scenario.getName().replaceAll(" ", "_") + "_" + timestamp + ".png";
